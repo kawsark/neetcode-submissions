@@ -1,0 +1,43 @@
+class Solution:
+  
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagrams = {}
+        res = []
+
+        for i in range(len(strs)): #act, pots
+            key_list = sorted(list(strs[i]))
+            key = ""
+            for j in key_list:
+                key = key + j
+
+            if key in anagrams:
+                anagrams[key].append(strs[i])
+            else:
+                anagrams[key] = [strs[i]]
+        
+        for v in anagrams.values():
+            res.append(v)
+        
+        return res
+
+    
+    
+    def isAnagram(self, a: list, b: list):
+        if len(a) != len(b):
+            return False
+
+        comp = [0]*26
+
+        for i in range(len(a)):
+            comp[ord(a[i])-ord('a')] += 1
+            comp[ord(b[i])-ord('a')] -= 1
+        
+        for i in comp:
+            if i != 0:
+                return False
+
+        return True
+
+        
+
+        
